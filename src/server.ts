@@ -3,7 +3,7 @@ import multer from 'multer';
 //import fs from 'fs/promises';
 import path from 'path';
 
-import { FileManager } from './classes/FileManager';
+import { FileManager, FileNotFoundError } from './classes/FileManager';
 import { countdown } from './recursion';
 
 const app = express();
@@ -103,11 +103,21 @@ app.get('/files', async (req, res) => {
     }
 
 });
-app.get('/download/:filename', (req, res) => {
+app.get('/download/:filename', async (req, res) => {
 
-    const filename = req.params.filename;
+    const filename = path.basename(req.params.filename);
 
-    res.download(`uploads/${filename}`);
+    try {
+        await manager.validateFile(filename);
+        res.download(path.join('uploads', filename));
+    } catch (error) {
+        if (error instanceof FileNotFoundError) {
+            res.status(404).send(error.message);
+        } else {
+            console.error(error);
+            res.status(500).send('Error al descargar el archivo');
+        }
+    }
 
 });
 

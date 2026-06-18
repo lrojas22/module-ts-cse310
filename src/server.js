@@ -5,6 +5,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const multer_1 = __importDefault(require("multer"));
+//import fs from 'fs/promises';
+const path_1 = __importDefault(require("path"));
 const FileManager_1 = require("./classes/FileManager");
 const recursion_1 = require("./recursion");
 const app = (0, express_1.default)();
@@ -91,9 +93,21 @@ app.get('/files', async (req, res) => {
         res.send('Error leyendo carpeta uploads');
     }
 });
-app.get('/download/:filename', (req, res) => {
-    const filename = req.params.filename;
-    res.download(`uploads/${filename}`);
+app.get('/download/:filename', async (req, res) => {
+    const filename = path_1.default.basename(req.params.filename);
+    try {
+        await manager.validateFile(filename);
+        res.download(path_1.default.join('uploads', filename));
+    }
+    catch (error) {
+        if (error instanceof FileManager_1.FileNotFoundError) {
+            res.status(404).send(error.message);
+        }
+        else {
+            console.error(error);
+            res.status(500).send('Error al descargar el archivo');
+        }
+    }
 });
 const port = 3000;
 app.listen(port, () => {
