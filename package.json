@@ -1,0 +1,33 @@
+{
+  "name": "module-ts-cse310",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lrojas22/module-ts-cse310.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/lrojas22/module-ts-cse310/issues"
+  },
+  "homepage": "https://github.com/lrojas22/module-ts-cse310#readme",
+  "dependencies": {
+    "ejs": "^6.0.1",
+    "express": "^5.2.1"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.6",
+    "@types/multer": "^2.1.0",
+    "@types/node": "^25.9.3",
+    "install": "^0.13.0",
+    "multer": "^2.2.0",
+    "npm": "^11.17.0"
+  }
+}
