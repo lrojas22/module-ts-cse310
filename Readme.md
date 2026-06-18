@@ -7,6 +7,8 @@ The software is a Node.js web server that lets a user upload a file through an H
 My purpose in writing this software was to understand how TypeScript's type system integrates with a real Node.js/Express backend, how to type third-party libraries (like Express and Multer) using their @types packages, and how TypeScript's static typing catches mistakes before the code ever runs, compared to plain JavaScript.
 
 # Software Demo Video
+https://youtu.be/QAYT9N4LISA
+
 
 # Development Environment
 
